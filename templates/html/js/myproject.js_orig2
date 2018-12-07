@@ -1,0 +1,450 @@
+/*
+This file contains all the custom code for ConnectMe and will be used for ajax calls
+*/
+
+var usertable1;
+var qsettable1;
+$(document).ready(function() {
+
+/* First Check for Page Auth, this will be the first function which will be executed  */
+
+ $.ajaxSetup({
+    headers: {
+      'Authorization': "JWT " + $.cookie('token')
+    }
+ });
+
+/* Call this function for validating token at server side to make sure that user is authenticated */
+var ret_code=validateToken();
+
+/* ############### Following Section Contains a code for Question Set and Quiz Generation ###################### */
+$("#questionsetform1").hide();
+$("#quizreport1").hide();
+$("#quizform1").hide();
+$("#showqsetrptbtn1").hide();
+$("#createquizfrmbtn1").hide();
+populateQsetData();
+
+$("#popqsetfrmbtn1").click(function() {
+   $("#qsetreport1").hide();
+   $("#questionsetform1").show(); 
+   $("#quizform1").hide();
+   $("#showqsetrptbtn1").hide();
+   $("#popqsetfrmbtn1").hide();   
+});
+
+$("#showqsetrptbtn1").click(function() {
+   $("#qsetreport1").show();
+   $("#questionsetform1").hide();
+   $("#quizform1").hide();
+   $("#showqsetrptbtn1").hide();
+   $("#popqsetfrmbtn1").show();
+   populateQsetData();
+});
+
+
+
+/* ################################################################################################################ */
+
+
+/* ####################################################################################################################### */
+/* ####################################################################################################################### */
+
+
+/*###### Following section container code for user admin tables. Please check useradmin.html pages################  */
+
+$("#useradmintab1").hide();
+
+/* ### Admin block for user administration will be enabled if and only if current role of the user is admin */
+
+if ($.cookie('role') == 'ADMIN')
+{
+$("#useradmintab1").show();
+$("#adduser1").hide();
+$("#adduserbtn1").hide();
+$("#showuserreportbtn1").hide();
+//populateTabData();
+
+$("#showuserreportbtn1").click(function() {
+  showuserreportbtn1();
+  populateTabData();
+});
+
+$("#useradmintab1").click(function() {
+  populateTabData();
+  useradmintab1();
+});
+
+$("#popadduserfrm1").click(function() {
+   popadduserfrm1();
+});
+
+$("#adduser1").submit(function(event) {
+    /* stop form from submitting normally */
+    event.preventDefault();
+    var data = $('#adduser1').serializeArray();
+    console.log(data);
+    var tenancy_id = $.cookie('tenancy_id');
+    data.push({name: "tenancy_id", value: tenancy_id})
+    console.log(data);
+    var req=$.ajax({
+      type: "POST",
+      url: "/api/usermgmt",
+      data: $.param(data),
+    });
+    req.done();
+    req.fail();
+    req.complete(resetAdduser1Form);
+ });
+}
+else {
+  $("#adduser1").hide();
+  $("#adduserbtn1").hide();
+  $("#showuserreportbtn1").hide();
+  $("#listuserdata1").hide();
+  $("#popadduserfrm1").hide();
+  $("#useradmintab1").hide();
+}
+/* ##### ADMIn Role Check Ends here ######## */
+
+$('#userreport1').on( 'click', '#editubtn', function () {
+        var data=usertable1.row( $(this).parents('tr') ).data();
+        //populateuserform();
+} );
+
+/*###### The above section contain code for user admin tables. Please check useradmin.html pages. The above code section ends here ################  */
+
+});
+
+
+
+/* ########### Token Auth block begins here  #################### */
+
+function validateToken()
+{
+if ( $.cookie('token') && $.cookie('username'))
+  {
+     var req1 = $.ajax({
+        type: "GET",
+        url: "/api/items",
+    });
+    req1.complete(chkResponse);
+}
+else
+ {
+  redirectLogin();
+ }
+}
+
+function redirectLogin()
+{
+  alert("You have not logged in! please Signin");
+  window.location.href = "login.html";
+}
+
+function chkResponse(response)
+{
+console.log(response);
+if (response['status']==200 && response['statusText']=='OK')
+ {
+	  return 0;
+ }
+ else
+  {
+	redirectLogin();
+  }
+redirectLogin();
+}
+
+/* ########### Token Auth block end here  #################### */
+
+
+/* ############ User Admin Table Management begin here ############## */
+
+function populateTabData()
+{
+ var tenancy_id = $.cookie('tenancy_id');
+ console.log('tenancy_id');
+
+ var req = $.ajax({
+    type: "GET",
+    url: "/api/usermgmt",
+    dataType: "json",
+    data:
+    {
+      "tenancy_id": tenancy_id,
+      "querytype": "userreport"
+    }
+ });
+ req.done(buildTable);
+ req.fail(checkError);
+}
+
+function buildTable(response)
+{
+  console.log(response);
+  obj = JSON.parse(response);
+  var rowdata;
+  console.log(obj);
+
+var resultarr= [];
+
+obj.forEach(function(Object){
+    resultarr.push([Object.first_name,Object.last_name,Object.email_id,Object.role,Object.designation,Object.mobile_num,Object.user_uid]);
+});
+
+console.log(resultarr);
+
+usertable1= $('#userreport1').DataTable( {
+        destroy: true,
+        data: resultarr,
+        columns: [
+            { title: "FirstName" },
+            { title: "LastName" },
+            { title: "Address" },
+            { title: "Role" },
+            { title: "Designation" },
+            { title: "Mobile Num" },
+            { title: "Edit" },            
+           ],
+            "columnDefs": [ {
+   	        "targets": [6],
+        	"data": null,
+	        "defaultContent": "<button id='editubtn'>Edit!</button>" + "<button id='deleteubtn'>Delete!</button>"
+                       } ],
+    } );
+
+}
+
+
+function checkError(response) {
+  var errordesc;
+  var errorcode;
+
+  if (response.responseJSON['description'])
+  {
+    errordesc = response.responseJSON['description'];
+  }
+  else
+  {
+    errordesc = "Unkown Error Occurred";
+  }
+  if (response.responseJSON['status_code'])
+  {
+    errorcode = response.responseJSON['status_code'];
+  }
+  else
+  {
+      errorcode = "Please try Again!";
+  }
+
+  alert("Login Failed :" + " " + errordesc + " - " + errorcode);
+  deleteCookie();
+  console.log(response);
+}
+
+function populateuserform (frm,data)
+{
+$.each(data, function(key, value){  
+    var $ctrl = $('[name='+key+']', frm); 
+    if($ctrl.is('select')){
+        $("option",$ctrl).each(function(){
+            if (this.value==value) { this.selected=true; }
+        });
+    }
+    else {
+        switch($ctrl.attr("type"))  
+        {  
+            case "text" :   case "hidden":  case "textarea":  
+                $ctrl.val(value);   
+                break;   
+            case "radio" : case "checkbox":   
+                $ctrl.each(function(){
+                   if($(this).attr('value') == value) {  $(this).attr("checked",value); } });   
+                break;
+        } 
+    } 
+});  
+
+}
+
+function resetAdduser1Form()
+{
+$("#adduser1").trigger("reset");
+}
+
+function showuserreportbtn1()
+{
+  $("#listuserdata1").show();
+  $("#adduser1").hide();
+  $("#adduserbtn1").hide();
+  $("#showuserreportbtn1").hide();
+  $("#popadduserfrm1").show();
+  $("#userreport1").show();
+}
+
+function useradmintab1()
+{
+  $("#listuserdata1").show();
+  $("#adduser1").hide();
+  $("#adduserbtn1").hide();
+  $("#showuserreportbtn1").hide();
+  $("#popadduserfrm1").show();
+}
+
+function popadduserfrm1 ()
+{
+  $("#adduser1").show();
+  $("#adduserbtn1").show();
+  $("#showuserreportbtn1").show();
+  $("#listuserdata1").hide();
+  $("#popadduserfrm1").hide();
+  $("#userreport1").hide();
+}
+/* ############ User Admin Table Management end here ########### */
+
+
+
+
+/* ##################### Code for Qustion Set and Quiz generation Starts here ############### */
+function populateQsetData()
+{
+ var tenancy_id = $.cookie('');
+ console.log('tenancy_id');
+
+ var req = $.ajax({
+    type: "GET",
+    url: "/api/qset",
+    dataType: "json",
+    data:
+    {
+      "tenancy_id": tenancy_id,
+      "querytype": "qsetreport"
+    }
+ });
+ req.done(buildQsetTable);
+ req.fail(checkError);
+}
+
+function buildQsetTable(response)
+{
+  console.log(response);
+  obj = JSON.parse(response);
+  var rowdata;
+  console.log(obj);
+
+var resultarr= [];
+
+obj.forEach(function(Object){
+    resultarr.push([Object.qset_name,Object.qset_title,Object.timeronpage,Object.maxtimetofinish,Object.showtimepanel,Object.showprogbar,Object.poll_or_quiz,Object.qset_intro_text,Object.qset_thankyou_text,Object.qset_status,Object.created_by,Object.updated_on,Object.qest_id]);
+});
+
+console.log(resultarr);
+
+qsettable1= $('#qsetreport1').DataTable({
+        destroy: true,
+        data: resultarr,
+        columns: [
+            { title: "Name" },
+            { title: "Title" },
+            { title: "TimerOnPage" },
+            { title: "MaxTimeToFinish" },
+            { title: "ShowTimePanel" },
+            { title: "ShowProgessBar" },
+            { title: "Poll_or_Quiz" },
+            { title: "Intro Text" },
+            { title: "ThankYou Text" },
+            { title: "Status" },
+            { title: "Created By" },
+            { title: "Updated By" },
+            { title: "Edit/Delete" },
+           ],
+            "columnDefs": [ {
+                "targets": -1,
+                "data": null,
+                "defaultContent": "<button id='editqsbtn'>Edit!</button>" + "<button id='deleteqsbtn'>Delete!</button>"
+                       } ],
+    } );
+
+}
+
+function PreViewQuiz()
+{
+Survey
+    .StylesManager
+    .applyTheme("default");
+
+var json = {
+    title: "American History",
+    showProgressBar: "bottom",
+    showTimerPanel: "top",
+    maxTimeToFinishPage: 10,
+    maxTimeToFinish: 25,
+    firstPageIsStarted: true,
+    startSurveyText: "Start Quiz",
+    pages: [
+        {
+            questions: [
+                {
+                    type: "html",
+                    html: "You are about to start quiz by history. <br/>You have 10 seconds for every page and 25 seconds for the whole survey of 3 questions.<br/>Please click on <b>'Start Quiz'</b> button when you are ready."
+                }
+            ]
+        }, {
+            questions: [
+                {
+                    type: "radiogroup",
+                    name: "civilwar",
+                    title: "When was the Civil War?",
+                    choices: [
+                        "1750-1800", "1800-1850", "1850-1900", "1900-1950", "after 1950"
+                    ],
+                    correctAnswer: "1850-1900"
+                }
+            ]
+        }, {
+            questions: [
+                {
+                    type: "radiogroup",
+                    name: "libertyordeath",
+                    title: "Who said 'Give me liberty or give me death?'",
+                    choicesOrder: "random",
+                    choices: [
+                        "John Hancock", "James Madison", "Patrick Henry", "Samuel Adams"
+                    ],
+                    correctAnswer: "Patrick Henry"
+                }
+            ]
+        }, {
+            maxTimeToFinish: 15,
+            questions: [
+                {
+                    type: "radiogroup",
+                    name: "magnacarta",
+                    title: "What is the Magna Carta?",
+                    choicesOrder: "random",
+                    choices: [
+                        "The foundation of the British parliamentary system", "The Great Seal of the monarchs of England", "The French Declaration of the Rights of Man", "The charter signed by the Pilgrims on the Mayflower"
+                    ],
+                    correctAnswer: "The foundation of the British parliamentary system"
+                }
+            ]
+        }
+    ],
+    completedHtml: "<h4>You have answered correctly <b>{correctedAnswers}</b> questions from <b>{questionCount}</b>.</h4>"
+};
+
+window.survey = new Survey.Model(json);
+
+survey
+    .onComplete
+    .add(function (result) {
+        document
+            .querySelector('#surveyResult')
+            .innerHTML = "result: " + JSON.stringify(result.data);
+    });
+
+$("#surveyElement").Survey({model: survey});
+}
+
+/* ##################### Code for Question Set and Quiz generation ends here ############### */

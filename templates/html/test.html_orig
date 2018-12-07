@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ConnectMe</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/sidenav.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="js/jquery.cookie.js"></script>
+  <script src="https://unpkg.com/jquery"></script>
+  <script src="https://surveyjs.azureedge.net/1.0.56/survey.jquery.js"></script>
+  <link href="https://surveyjs.azureedge.net/1.0.56/survey.css" type="text/css" rel="stylesheet"/>
+  <link rel="stylesheet" href="./index.css">
+  <script src="js/custom.js"></script>
+  <script src="js/myproject.js"></script>
+</head>
+<body>
+<!-- Main Menu Items begin here -->
+
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="index.html">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="myproject.html">MyProjects</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" id="loginshow">
+      <li><a href="register.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" id="loginhide">
+      <li><a href="#"><span class="glyphicon glyphicon-envelope" id="uname"> Welcome! </span></a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-out" id="logout"> Logout</span></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!-- Main Menu Items ends here -->
+
+<!---- Side Navigation Bar Start here -->
+
+<!---- Side Navigation Bar Start here -->
+
+<div class="nav-side-menu">
+    <div class="brand">Brand Logo</div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+    <div class="menu-list">
+        <ul id="menu-content" class="menu-content collapse out">
+            <li>
+                <a href="#">
+                    <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                </a>
+            </li>
+            <li data-toggle="collapse" data-target="#products" class="collapsed active">
+                <a href="#"><i class="fa fa-gift fa-lg"></i> Manage Questionnaire <span class="arrow"></span></a>
+            </li>
+            <li data-toggle="collapse" data-target="#service" class="collapsed">
+                <a href="#"><i class="fa fa-globe fa-lg"></i> Publish Questionnaire <span class="arrow"></span></a>
+            </li>
+            <li data-toggle="collapse" data-target="#results" class="collapsed">
+                <a href="#"><i class="fa fa-car fa-lg"></i> Manage Results <span class="arrow"></span></a>
+            </li>
+            <li data-toggle="collapse" data-target="#resume" class="collapsed">
+                <a href="#"><i class="fa fa-car fa-lg"></i> Manage Resumes <span class="arrow"></span></a>
+            </li>
+            <li>
+                <a href="#"> <i class="fa fa-user fa-lg"></i> My Profile </a>
+            </li>
+            <li>
+               <a href="useradmin.html" id="useradmintab1"><i class="fa fa-gift fa-lg"></i> Administartion  <span class="arrow"></span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="container" id="main">
+    <div class="row">
+        <div class="col-md-12">
+        <div id="surveyElement"></div>
+        <div id="surveyResult"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>
+
+

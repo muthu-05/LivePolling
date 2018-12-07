@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ConnectMe</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="css/editor.dataTables.min.css">
+  <link href="https://surveyjs.azureedge.net/1.0.58/survey.css" type="text/css" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/sidenav.css">
+  <link rel="stylesheet" href="css/useradd.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="https://surveyjs.azureedge.net/1.0.58/survey.jquery.js"></script>
+  <script src="js/jquery.cookie.js"></script>
+  <script src="js/custom.js"></script>
+  <script src="js/quiz.js"></script>
+</head>
+<body>
+
+<!-- Main Menu Items begin here -->
+
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="index.html">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="myproject.html">MyProjects</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" id="loginshow">
+      <li><a href="register.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" id="loginhide">
+      <li><a href="#"><span class="glyphicon glyphicon-envelope" id="uname"> Welcome! </span></a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-out" id="logout"> Logout</span></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<br>
+
+<div class="nav-side-menu">
+    <div class="brand">Brand Logo</div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+    <div class="menu-list">
+        <ul id="menu-content" class="menu-content collapse out">
+            <li>
+                <a href="#">
+                    <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                </a>
+            </li>
+            <li data-toggle="collapse" data-target="#products" class="collapsed active">
+                <a href="#"><i class="fa fa-gift fa-lg"></i> Manage Questionnaire <span class="arrow"></span></a>
+            </li>
+            <li data-toggle="collapse" data-target="#service" class="collapsed">
+                <a href="#"><i class="fa fa-globe fa-lg"></i> Publish Questionnaire <span class="arrow"></span></a>
+            </li>
+            <li data-toggle="collapse" data-target="#results" class="collapsed">
+                <a href="#"><i class="fa fa-car fa-lg"></i> Manage Results <span class="arrow"></span></a>
+            </li>
+            <li data-toggle="collapse" data-target="#resume" class="collapsed">
+                <a href="#"><i class="fa fa-car fa-lg"></i> Manage Resumes <span class="arrow"></span></a>
+            </li>
+            <li>
+                <a href="#"> <i class="fa fa-user fa-lg"></i> My Profile </a>
+            </li>
+            <li>
+               <a href="useradmin.html" id="useradmintab1"><i class="fa fa-gift fa-lg"></i> Administartion  <span class="arrow"></span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!--------- Side Navigation Bar End here ----------->
+
+<!------------------------------- Panel Section Begins here --------------------->
+<div class="container" id="main">
+    <div class="row">
+    <div class="col-md-12">
+    <div class="panel panel-default">
+    <div class="panel-body">Administer Question Set/Quizes
+       <div style="text-align: right;">
+        <input type="submit" id="popqsetfrmbtn1" value="Create Question Set" class="btn">
+       </div>
+       <div style="text-align: right;">
+        <input type="submit" id="showqsetfrmbtn1" value="Show Question Set Report" class="btn" >
+       </div>
+       <div style="text-align: right;">
+        <input type="submit" id="createquizfrmbtn1" value="Create Quiz Questions" class="btn" >
+       </div>
+   </div>
+ </div>
+
+<!-----------------------Panel Section Ends here ------------------------>
+
+<!--------------------------- Preview Quiz Starts here -------------------->
+       <div id="surveyElement"></div>
+        <div id="surveyResult"></div>
+<!---------------------------- Preview Quiz Section Ends here ------------------>
+
+
+<!------------------------------------------------------------- Question Set Section -------------------------------------------->
+
+<!--------- Question Set Reports  Begins Here ----------->
+<div class="container" id="listqsetreport1">
+<a class="editor_create">Create New Question Set </a>
+<table id="qsetreport1" class="display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Question Set Name</th>
+                            <th>Title</th>
+                            <th></thl Quiz Start Text>
+                            <th>Time on Per Page</th>
+                            <th>Max Time to Finish</th>
+                            <th>Show Timer Panel</th>
+                            <th>Show Progress Bar</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Question Set Name</th>
+                            <th>Title</th>
+                            <th></thl Quiz Start Text>
+                            <th>Time on Per Page</th>
+                            <th>Max Time to Finish</th>
+                            <th>Show Timer Panel</th>
+                            <th>Show Progress Bar</th>
+                            <th>Edit</th>
+                        </tr>
+                    </tfoot>
+                </table>
+</div>
+<!--------- Question Set Reports End Here ----------->
+
+
+<!--------- Question Set HTML Form Begins Here ----------->
+<div class="signup-form">
+    <form id="questionsetform1">
+          <h2> Question Set </h2>
+           <p class="hint-text">Add Question Set in your system to create a Quiz or Poll!</p>
+       <div class="form-group">
+        <div class="row">
+ <div class="col-xs-6"><input type="text" class="form-control" name="qset_name" placeholder="Question Set Name" required="required"></div>
+ <div class="col-xs-6"><input type="text" class="form-control" name="qset_title" placeholder="Title" required="required"></div>
+	</div>
+       </div>
+        <div class="form-group">
+        <input type="text" class="form-control" name="quizhtml" placeholder="Quiz Start Text" required="required">
+        </div>
+	<div class="form-group">
+        <input type="text" class="form-control" name="timeonperpage" placeholder="maxTimeToFinishPage(Seconds)" required="required">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="maxtimetofinish" placeholder="maxTimeToFinish(Seconds)" required="required">
+        </div>
+        <div class="form-group">
+           <label class="checkbox-inline"><input type="checkbox" name="showtimepanel"  required="required"> ShowTimerPanel</a></label>
+           <label class="checkbox-inline"><input type="checkbox" name="showprogbar" required="required"> showProgressBar</a></label>
+           <label class="checkbox-inline"><input type="checkbox" name="poll_or_quiz" required="required"> Poll_or_Quiz </a></label>
+       </div>
+        <div class="form-group" required="required">
+          <select label="Status" class="form-control" id="qsetstatusid" name="qset_status">
+             <option value="" disabled selected hidden>Question Set Status...</option>
+             <option value="open">Opened</option>
+             <option value="close">Closed</option>
+           </select>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="qset_intro_text" placeholder="Introduction Text" required="required">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="qset_thankyou_text" placeholder="Thank You Text" required="required">
+        </div>
+	<div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg btn-block" id="createquestionset">Submit</button>
+        </div>
+    </form>
+</div>
+<!--------- Question Set HTML Form Ends  Here ----------->
+
+<!------------------------------------------------------------- Questions set  End Section -------------------------------------------->
+
+
+<!--------------------------------------------------Quiz Questions Section Begin here -------------------------------------------------->
+
+<!--------- Question Set Reports  Begins Here ----------->
+<div class="container" id="listqsetreport1">
+<a class="editor_create">Create New Question Set </a>
+<table id="quizreport1" class="display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Question Type</th>
+                            <th></thl Publish Or Not>
+                            <th>corect_answer</th>
+                            <th>Option1</th>
+                            <th>Option2</th>
+                            <th>Option3</th>
+                            <th>Option4</th>
+                            <th>Option5</th> 
+                            <th>Option6</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Question</th>
+                            <th>Question Type</th>
+                            <th></thl Publish Or Not>
+                            <th>corect_answer</th>
+                            <th>Option1</th>
+                            <th>Option2</th>
+                            <th>Option3</th>
+                            <th>Option4</th>
+                            <th>Option5</th>
+                            <th>Option6</th>
+                            <th>Edit</th>
+                        </tr>
+                    </tfoot>
+                </table>
+</div>
+<!--------- Question Set Reports End Here ----------->
+
+<!--------- Question Set HTML Form Begins Here ----------->
+<div class="signup-form">
+    <form id="quizform1">
+          <h2> Quiz Questions </h2>
+           <p class="hint-text">Add Questions in your Quiz or Poll!</p>
+       <div class="form-group">
+        <div class="row">
+ <div class="col-xs-6"><input type="text" class="form-control" name="question" placeholder="Type your Question Here" required="required"></div>
+        </div>
+       </div>
+         <div class="form-group" required="required">
+          <select label="Question Type" class="form-control" id="qtypeid" name="question_type">
+             <option value="" disabled selected hidden>Question Set Status...</option>
+             <option value="checkbox">CheckBox</option>
+           </select>
+        </div>
+        <div class="form-group">
+        <input type="text" class="form-control" name="answer01" placeholder="Type 1st Options" required="required">
+        <label class="checkbox-inline"><input type="checkbox" name="corect_answer1"> Is this is a Correct Answer?</a></label>
+        </div>
+        <div class="form-group">
+        <input type="text" class="form-control" name="amswer02" placeholder="Type 2nd Option" required="required">
+        <label class="checkbox-inline"><input type="checkbox" name="corect_answer2"> Is this is a Correct Answer?</a></label>
+        </div>
+        <div class="form-group">
+        <input type="text" class="form-control" name="answer03" placeholder="Type 3rd Option">
+        <label class="checkbox-inline"><input type="checkbox" name="corect_answer3"> Is this is a Correct Answer?</a></label>
+        </div>
+        <div class="form-group">
+        <input type="text" class="form-control" name="answer04" placeholder="Type 4th Option">
+        <label class="checkbox-inline"><input type="checkbox" name="corect_answer4"> Is this is a Correct Answer?</a></label>
+        </div>
+        <div class="form-group">
+        <input type="text" class="form-control" name="answer05" placeholder="Type 5th Option">
+        <label class="checkbox-inline"><input type="checkbox" name="corect_answer5"> Is this is a Correct Answer?</a></label>
+        </div>
+        <div class="form-group">
+        <input type="text" class="form-control" name="answer06" placeholder="Type 6th Option">
+        <label class="checkbox-inline"><input type="checkbox" name="corect_answer6"> Is this is a Correct Answer?</a></label>
+        </div>
+        <div class="form-group">
+           <label class="checkbox-inline"><input type="checkbox" name="publish_yn"> Can Question be published?</a></label>
+       </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg btn-block" id="create question">Submit</button>
+        </div>
+    </form>
+</div>
+<!------------------------------------ Quiz Form Ends Here ----------------------------------------------->
+
+
+<!------------------------------------------------------------- Quiz Questions section  End Section -------------------------------------------->
+
+
+
+</body>
+</html>

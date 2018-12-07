@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ConnectMe</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="css/editor.dataTables.min.css">
+  <link rel="stylesheet" href="css/useradd.css">
+  <link rel="stylesheet" href="css/sidenav.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="js/jquery.cookie.js"></script>
+  <script src="js/custom.js"></script>
+  <script src="js/useradmin.js"></script>
+</head>
+<body>
+
+<!-- Main Menu Items begin here -->
+
+<!-- Main Menu Items begin here -->
+
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="index.html">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="myproject.html">MyProjects</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" id="loginshow">
+      <li><a href="register.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" id="loginhide">
+      <li><a href="#"><span class="glyphicon glyphicon-envelope" id="uname"> Welcome! </span></a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-out" id="logout"> Logout</span></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<!-- Main Menu Items ends here -->
+
+<!---- Side Navigation Bar Start here -->
+
+<!---- Side Navigation Bar Start here -->
+
+<div class="nav-side-menu">
+    <div class="brand">Brand Logo</div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+    <div class="menu-list">
+        <ul id="menu-content" class="menu-content collapse out">
+            <li>
+                <a href="#">
+                    <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                </a>
+            </li>
+            <li data-toggle="collapse" data-target="#products" class="collapsed active">
+                <a href="#"><i class="fa fa-gift fa-lg"></i> Manage Questionnaire <span class="arrow"></span></a>
+            </li>
+            <li data-toggle="collapse" data-target="#service" class="collapsed">
+                <a href="#"><i class="fa fa-globe fa-lg"></i> Publish Questionnaire <span class="arrow"></span></a>
+            </li>
+            <li data-toggle="collapse" data-target="#results" class="collapsed">
+                <a href="#"><i class="fa fa-car fa-lg"></i> Manage Results <span class="arrow"></span></a>
+            </li>
+            <li data-toggle="collapse" data-target="#resume" class="collapsed">
+                <a href="#"><i class="fa fa-car fa-lg"></i> Manage Resumes <span class="arrow"></span></a>
+            </li>
+            <li>
+                <a href="#"> <i class="fa fa-user fa-lg"></i> My Profile </a>
+            </li>
+            <li>
+               <a href="useradmin.html" id="useradmintab1"><i class="fa fa-gift fa-lg"></i> Administartion  <span class="arrow"></span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!--------- Side Navigation Bar End here ----------->
+
+<!----------- User Reports begins From Here -------------->
+<!---- User Add Form Starts Here --->
+
+
+<!----------- User Reports Ends  Here -------------->
+
+
+
+<!----------- User Signup form begins Here -------------->
+<div class="container" id="main">
+    <div class="row">
+    <div class="col-md-12">
+    <div class="panel panel-default">
+    <div class="panel-body">User Administration
+       <div style="text-align: right;">
+        <input type="submit" id="popadduserfrm1" value="Add User under My Tenancy" class="btn" >
+       </div>
+       <div style="text-align: right;">
+        <input type="submit" id="showuserreportbtn1" value="Show Users under My Tenancy" class="btn" >
+       </div>
+   </div>
+ </div>
+<!--------------------------------- User Reports section Starts Here --------------------------------->
+<div class="container" id="listuserdata1">
+<a class="editor_create">Create new record</a>
+<table id="userreport1" class="display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>FirstName</th>
+                            <th>LastName</th>
+                            <th></thl Address>
+                            <th>Role</th>
+                            <th>Designation</th>
+                            <th>Mobile Num</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                           <th>FirstName</th>
+                            <th>LastName</th>
+                            <th></thl Address>
+                            <th>Role</th>
+                            <th>Designation</th>
+                            <th>Mobile Num</th>
+                            <th>Edit</th>
+                        </tr>
+                    </tfoot>
+                </table>
+</div>
+<!----------- User Reports section Ends  Here --------------------------------------------------------->
+
+<!---------------------------- User Add Form Starts Here -------------------------------------------------->
+<div class="signup-form">
+<!-------- Main Div Starts Here --------------------->
+    <form id="adduser1">
+                <h2>Add User</h2>
+                <p class="hint-text">Add users Under You tenancy!.</p>
+        <div class="form-group">
+                        <div class="row">
+                                <div class="col-xs-6"><input type="text" class="form-control" name="firstname" placeholder="First Name" required="required"></div>
+                                <div class="col-xs-6"><input type="text" class="form-control" name="lastname" placeholder="Last Name" required="required"></div>
+                        </div>
+        </div>
+        <div class="form-group">
+                <input type="email" class="form-control" name="email_address" placeholder="Email" required="required">
+        </div>
+        <div class="form-group">
+                        <div class="row">
+                <div class="col-xs-6"><input type="text" class="form-control" name="designation" placeholder="Designation" required="required"></div>
+                <div class="col-xs-6"> <input type="text" class="form-control" name="mobile_num" placeholder="Mobile Number" required="required"></div>
+                        </div>
+        </div>
+        <div class="form-group" required="required">
+          <select label="Role" class="form-control" id="role" name="role_name">
+             <option value="" disabled selected hidden>Show Time Panel...</option>
+             <option value="admin">Admin</option>
+             <option value="recruiter">Recruiter</option>
+             <option value="client">Client</option>
+           </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg btn-block" id="adduserbtn1">Create</button>
+        </div>
+    </form>
+</div>
+<!-------Main Div Ends below for User Forms1 --------------------------->
+  </div>
+<!------------- User Add Form Ends Here ----------------------------------------------------------------------------------->
+</div>
+  </div>
+</div>
+<!---------- User Signup form ends here ------------------->
+
+
+</body>
+</html>

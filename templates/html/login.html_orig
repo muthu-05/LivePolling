@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ConnectMe</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="js/custom.js"></script>
+</head>
+
+<!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
+
+<body>
+<!-- Main Menu Items begin here -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#services">SERVICES</a></li>
+        <li><a href="#pricing">PRICING</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+        <button id="hide">hide</button>
+        <button id="show">show</button>
+      </ul>
+     <div id="loginbutton">
+      <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+      </div>
+     <ul class="nav navbar-nav navbar-right">
+    </div>
+  </div>
+</nav>
+
+<!-- Main Menu Items ends here -->
+ <br>
+ <br>
+ <br>
+
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Sign In</h5>
+            <form class="form-signin">
+              <div class="form-label-group">
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                <label for="inputEmail">Email address</label>
+              </div>
+
+              <div class="form-label-group">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <label for="inputPassword">Password</label>
+              </div>
+
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                <label class="custom-control-label" for="customCheck1">Remember password</label>
+              </div>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+              <hr class="my-4">
+              <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
+              <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--- About Divs Begin here -->
+
+<div class="container-fluid bg-grey">
+  <h2 class="text-center">CONTACT</h2>
+  <div class="row">
+    <div class="col-sm-5">
+      <p>Contact us and we'll get back to you within 24 hours.</p>
+      <p><span class="glyphicon glyphicon-map-marker"></span> San Jose , California, US</p>
+      <p><span class="glyphicon glyphicon-phone"></span> +00 1650-55x-0000</p>
+      <p><span class="glyphicon glyphicon-envelope"></span> MGroup@connectme.com </p>
+    </div>
+    <div class="col-sm-7">
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="name" name="Name" placeholder="Name" type="text" required>
+        </div>
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="email" name="Email" placeholder="Email" type="email" required>
+        </div>
+      </div>
+      <textarea class="form-control" id="comments" name="Comment!" placeholder="Comment" rows="5"></textarea><br>
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <button class="btn btn-default pull-right" type="submit">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--- About Divs End here -->
+
+</body>
